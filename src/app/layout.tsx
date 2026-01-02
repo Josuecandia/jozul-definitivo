@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   // 1. ESTO ES VITAL: Define la raíz de tu dominio para que las imágenes funcionen
-  metadataBase: new URL('https://jozul-definitivo.vercel.app/'), // O usa tu link de Vercel si aún no conectas el dominio
+  metadataBase: new URL('https://jozul.tech/'), // O usa tu link de Vercel si aún no conectas el dominio
 
   title: {
     default: "JOZUL | Desarrollo de Software & Apps",

@@ -90,7 +90,7 @@ export default function Contact() {
                 <div>
                   <p className="text-sm text-slate-400 font-medium mb-1 uppercase tracking-wider">Correo Electrónico</p>
                   <a href="mailto:contacto@jozul.com" className="text-white font-bold text-xl hover:text-blue-400 transition-colors">
-                    contacto@jozul.com
+                    contacto@jozul.tech
                   </a>
                 </div>
               </div>
