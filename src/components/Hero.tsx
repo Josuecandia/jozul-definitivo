@@ -51,11 +51,11 @@ export default function Hero() {
           </a>
           
           <a 
-            href="#services" 
+            href="#portfolio" 
             className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-slate-300 bg-slate-800/50 border border-slate-700 rounded-lg hover:bg-slate-800 hover:text-white transition-all backdrop-blur-sm"
           >
             <Code2 className="mr-2 w-5 h-5" />
-            Ver Tecnologías
+            Ver Proyectos
           </a>
         </div>
       </div>
