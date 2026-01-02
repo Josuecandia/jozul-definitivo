@@ -1,7 +1,6 @@
 # Dependencias (Pesadísimas, no subir)
 node_modules
 /node_modules
-package-lock.json
 
 # Next.js build (Archivos temporales)
 .next/
