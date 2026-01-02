@@ -101,7 +101,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="text-sm text-slate-400 font-medium mb-1 uppercase tracking-wider">Teléfono</p>
-                  <p className="text-white font-bold text-xl">+52 (442) 123 4567</p>
+                  <p className="text-white font-bold text-xl">4427526699</p>
                 </div>
               </div>
 
