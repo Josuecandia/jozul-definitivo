@@ -97,8 +97,8 @@ export default function Contact() {
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-white font-medium">Oficinas</h4>
-                  <p className="text-slate-400">Ciudad de México, Reforma 222</p>
+                  <h4 className="text-white font-medium">Ubicación</h4>
+                  <p className="text-slate-400">Querétaro, México</p>
                 </div>
               </div>
             </div>
