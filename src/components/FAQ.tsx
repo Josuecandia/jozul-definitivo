@@ -12,10 +12,6 @@ const FAQS = [
     answer: "Te asesoramos para comprarlo a tu nombre (para que tú seas el dueño real) y nosotros nos encargamos de toda la configuración técnica y subida al servidor."
   },
   {
-    question: "¿Hacen factura fiscal?",
-    answer: "Sí, por supuesto. Todos nuestros servicios son facturables y los precios son más IVA si requieres comprobante."
-  },
-  {
     question: "¿Qué pasa si necesito cambios después?",
     answer: "Ofrecemos 30 días de soporte gratuito post-entrega para cualquier ajuste técnico. También tenemos planes de mantenimiento mensual si deseas actualizaciones constantes."
   }
