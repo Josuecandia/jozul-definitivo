@@ -5,7 +5,7 @@ const PROJECTS = [
   {
     title: "3F MÉXICO",
     category: "Desarrollo Web / Corporativo",
-    image: "/projects/3fmexico.jpg", // Asegúrate que esto coincida con tus archivos
+    image: "/projects/3fmexico.jpg", 
     description: "Rediseño total de la página web para mejorar la presencia digital y la experiencia de usuario.",
     tags: ["React", "UI/UX", "Responsive"],
     link: "https://3fmexico.com/",
@@ -30,13 +30,14 @@ const PROJECTS = [
     status: "live"
   },
   {
-    title: "Laboratorio Diesel AV",
-    category: "Software & Web",
-    image: "/projects/diesel.jpg", // Cambia esto si tienes la imagen
-    description: "Plataforma web integrada con un sistema de seguimiento para procesos de laboratorio.",
-    tags: ["Next.js", "React", "Supabase"],
-    link: "#",
-    status: "development"
+    /* --- PROYECTO NUEVO AGREGADO AQUÍ --- */
+    title: "Notaría Pública 30",
+    category: "Rediseño Web / Corporativo",
+    image: "/projects/notaria30.jpg", // <--- Asegúrate de guardar tu foto con este nombre
+    description: "Modernización completa del sitio web para renovar la imagen institucional y facilitar el acceso a servicios notariales.",
+    tags: ["PHP", "JavaScript", "CSS"],
+    link: "https://notaria30qro.mx/web/",
+    status: "live"
   }
 ];
 
@@ -61,20 +62,17 @@ export default function Portfolio() {
           {PROJECTS.map((project, index) => (
             <div key={index} className="group relative rounded-2xl overflow-hidden h-[400px] border border-slate-800 bg-slate-900">
               
-              {/* Imagen: En móvil se ve normal, en PC hace zoom */}
+              {/* Imagen: Zoom suave al pasar el mouse */}
               <img 
                 src={project.image} 
                 alt={project.title} 
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40"
               />
               
-              {/* Overlay: Siempre visible en móvil para que se lea el texto */}
+              {/* Overlay oscuro para que el texto se lea bien */}
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent opacity-90" />
 
-              {/* Contenido:
-                  - translate-y-0: En móvil está en su lugar (visible).
-                  - md:translate-y-4: En PC baja un poco para subir animado.
-              */}
+              {/* Contenido de la tarjeta */}
               <div className="absolute inset-0 p-8 flex flex-col justify-end transition-transform duration-300 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0">
                 
                 <span className="text-blue-400 text-xs font-bold mb-2 uppercase tracking-wider flex items-center gap-2">
@@ -84,10 +82,7 @@ export default function Portfolio() {
                 
                 <h4 className="text-2xl font-bold text-white mb-2">{project.title}</h4>
                 
-                {/* Descripción y Tags: 
-                    - opacity-100: Visible en móvil.
-                    - md:opacity-0: Invisible en PC (hasta hover).
-                */}
+                {/* Descripción y botones (Visibles siempre en celular, aparecen en PC) */}
                 <div className="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 delay-75">
                   <p className="text-slate-300 text-sm mb-4 line-clamp-2">
                     {project.description}
