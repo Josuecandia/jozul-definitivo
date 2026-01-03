@@ -15,7 +15,7 @@ export async function POST(request: Request) {
       secure: true,
       auth: {
         user: process.env.SMTP_USER, // <--- Vuelve a usar variable
-        pass: "Julieta468210.", // <--- Vuelve a usar variable
+        pass: process.env.SMTP_PASS, // <--- Vuelve a usar variable
       },
     });
 
