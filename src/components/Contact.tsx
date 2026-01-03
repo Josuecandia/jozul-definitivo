@@ -2,16 +2,20 @@
 import React, { useState, useRef } from 'react';
 import { Mail, Phone, MapPin, Send, Loader2 } from 'lucide-react';
 import ReCAPTCHA from "react-google-recaptcha";
+import emailjs from '@emailjs/browser'; // <--- 1. IMPORTANTE: Importamos EmailJS
 
 export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const formRef = useRef<HTMLFormElement>(null); // <--- Referencia para EmailJS
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
+    // Validación básica de Captcha (Visual)
     if (!captchaToken) {
       alert("Por favor confirma que no eres un robot.");
       return;
@@ -19,40 +23,33 @@ export default function Contact() {
 
     setLoading(true);
 
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      message: formData.get('message'),
-      captchaToken: captchaToken
-    };
+    // 👇 2. AQUÍ VAN TUS CLAVES (Pégalas dentro de las comillas)
+    const SERVICE_ID = "service_d2uutro";   
+    const TEMPLATE_ID = "template_ca7q6qq"; // Ej: template_x9s...
+    const PUBLIC_KEY = "AmFWWKU_LlQSBV5Do";   // Ej: W8s_92...
 
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        setSuccess(true);
-        e.currentTarget.reset();
-        recaptchaRef.current?.reset();
-        setCaptchaToken(null);
-      } else {
-        alert('Hubo un error al enviar el mensaje.');
-      }
-    } catch (error) {
-      alert('Error de conexión.');
-    } finally {
-      setLoading(false);
+    // 3. ENVÍO CON EMAILJS (Reemplaza al fetch)
+    if (formRef.current) {
+      emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY)
+        .then((result) => {
+          setSuccess(true);
+          e.currentTarget.reset();      // Limpia el form visualmente
+          recaptchaRef.current?.reset(); // Resetea el captcha
+          setCaptchaToken(null);
+        }, (error) => {
+          console.error("Error envío:", error.text);
+          alert('Hubo un error al enviar el mensaje. Inténtalo más tarde.');
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     }
-  }
+  };
 
   return (
     <section id="contact" className="py-24 bg-slate-950 relative overflow-hidden">
       
-      {/* Fondos decorativos para dar ambiente */}
+      {/* Fondos decorativos */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
          <div className="absolute bottom-[20%] left-[-10%] w-[500px] h-[500px] bg-blue-900/20 rounded-full blur-[100px]" />
          <div className="absolute top-[10%] right-[-10%] w-[400px] h-[400px] bg-purple-900/20 rounded-full blur-[100px]" />
@@ -61,14 +58,12 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
-          {/* COLUMNA IZQUIERDA: DISEÑO RESTAURADO */}
+          {/* COLUMNA IZQUIERDA (Info) */}
           <div>
-            {/* Etiqueta pequeña superior */}
             <h2 className="text-blue-500 font-semibold tracking-wide uppercase text-sm mb-3">
               Contacto
             </h2>
             
-            {/* TÍTULO GIGANTE CON DEGRADADO (Como en tu foto) */}
             <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
               Hablemos de <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
@@ -81,15 +76,13 @@ export default function Contact() {
             </p>
             
             <div className="space-y-8">
-              
-              {/* Iconos con fondo degradado y diseño vibrante */}
               <div className="flex items-center gap-5 group">
                 <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-500/25 group-hover:scale-110 transition-transform duration-300">
                   <Mail className="w-8 h-8" />
                 </div>
                 <div>
                   <p className="text-sm text-slate-400 font-medium mb-1 uppercase tracking-wider">Correo Electrónico</p>
-                  <a href="mailto:contacto@jozul.com" className="text-white font-bold text-xl hover:text-blue-400 transition-colors">
+                  <a href="mailto:contacto@jozul.tech" className="text-white font-bold text-xl hover:text-blue-400 transition-colors">
                     contacto@jozul.tech
                   </a>
                 </div>
@@ -118,25 +111,29 @@ export default function Contact() {
           </div>
 
           {/* COLUMNA DERECHA: FORMULARIO */}
-          <form onSubmit={handleSubmit} className="bg-slate-900/80 p-8 md:p-10 rounded-3xl border border-slate-800 shadow-2xl backdrop-blur-xl relative">
+          {/* Agregamos la referencia 'ref={formRef}' aquí */}
+          <form ref={formRef} onSubmit={handleSubmit} className="bg-slate-900/80 p-8 md:p-10 rounded-3xl border border-slate-800 shadow-2xl backdrop-blur-xl relative">
             <div className="space-y-6 relative z-10">
               
               <div>
                 <label htmlFor="name" className="block text-sm font-bold text-slate-300 mb-2 pl-1">Nombre Completo</label>
-                <input required type="text" name="name" className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-4 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none transition-all placeholder:text-slate-600" placeholder="Ej. Juan Pérez" />
+                {/* CAMBIO: name="user_name" para coincidir con el template */}
+                <input required type="text" name="user_name" className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-4 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none transition-all placeholder:text-slate-600" placeholder="Ej. Juan Pérez" />
               </div>
 
               <div>
                 <label htmlFor="email" className="block text-sm font-bold text-slate-300 mb-2 pl-1">Correo Electrónico</label>
-                <input required type="email" name="email" className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-4 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none transition-all placeholder:text-slate-600" placeholder="juan@empresa.com" />
+                {/* CAMBIO: name="user_email" para coincidir con el template */}
+                <input required type="email" name="user_email" className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-4 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none transition-all placeholder:text-slate-600" placeholder="juan@empresa.com" />
               </div>
 
               <div>
                 <label htmlFor="message" className="block text-sm font-bold text-slate-300 mb-2 pl-1">Mensaje</label>
+                {/* El name="message" ya estaba bien */}
                 <textarea required name="message" rows={4} className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-4 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none transition-all resize-none placeholder:text-slate-600" placeholder="Cuéntame sobre tu proyecto..." />
               </div>
 
-              {/* RECAPTCHA CENTRADO */}
+              {/* RECAPTCHA */}
               <div className="flex justify-center py-2 scale-90 md:scale-100 origin-center">
                 <ReCAPTCHA
                   ref={recaptchaRef}
