@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "JOZUL - Transformamos Ideas en Código",
     description: "Desarrollo de software profesional y escalable para empresas modernas.",
-    url: "https://jozul.com",
+    url: "https://jozul.tech",
     siteName: "JOZUL Agencia Digital",
     locale: "es_MX",
     type: "website",
@@ -42,7 +42,12 @@ export const metadata: Metadata = {
       },
     ],
   },
-  
+  twitter: {
+    card: "summary_large_image",
+    title: "JOZUL - Transformamos Ideas en Código",
+    description: "Desarrollo de software profesional y escalable para empresas modernas.",
+    images: ["/og-image.jpg"], // Usa la misma imagen que en OpenGraph
+  },
   // Icono en la pestaña del navegador
   icons: {
     icon: '/favicon.ico',
