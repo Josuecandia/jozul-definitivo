@@ -21,16 +21,14 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-slate-900 font-sans text-slate-100">
       <Navbar />
-      <Hero />
-      
+      <Hero />  
       <TechStack />
       <Services />
       <About />
       <Portfolio />
       <Stats />
       <Testimonials />
-      <FAQ />
-      
+      <FAQ />   
       {/* Usamos el Wrapper en lugar del componente directo */}
       <ContactWrapper />
       
