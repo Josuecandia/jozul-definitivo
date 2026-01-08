@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Preloader from "@/components/PreLoader"; // Asegúrate que la mayúscula coincida con tu archivo
+import Preloader from "@/components/PreLoader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,18 +14,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  // 1. ESTO ES VITAL: Define la raíz de tu dominio para que las imágenes funcionen
-  metadataBase: new URL('https://jozul.tech/'), // O usa tu link de Vercel si aún no conectas el dominio
+  // 1. ESTO ES VITAL: Le dice a WhatsApp dónde empieza tu web
+  metadataBase: new URL('https://jozul.tech'),
 
   title: {
     default: "JOZUL | Desarrollo de Software & Apps",
     template: "%s | JOZUL"
   },
-  description: "Agencia de tecnología experta en desarrollo web, aplicaciones móviles y transformación digital. Llevamos tu negocio al siguiente nivel.",
-  keywords: ["Desarrollo Web", "App Móvil", "Software", "Agencia Digital", "React", "Next.js", "Querétaro"],
-  authors: [{ name: "JOZUL Team" }],
+  description: "Agencia de tecnología experta en desarrollo web y apps móviles en Querétaro.",
   
-  // Para compartir en redes (WhatsApp, Facebook, LinkedIn)
+  // 2. AQUÍ CONECTAMOS LA IMAGEN DE PUBLIC
   openGraph: {
     title: "JOZUL - Transformamos Ideas en Código",
     description: "Desarrollo de software profesional y escalable para empresas modernas.",
@@ -35,20 +33,21 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg", 
+        url: '/og-image.jpg', // 👈 Aquí apuntamos a tu archivo en public
         width: 1200,
         height: 630,
-        alt: "JOZUL Agencia Digital",
+        alt: 'JOZUL Agencia Digital',
       },
     ],
   },
+  
   twitter: {
     card: "summary_large_image",
-    title: "JOZUL - Transformamos Ideas en Código",
-    description: "Desarrollo de software profesional y escalable para empresas modernas.",
-    images: ["/og-image.jpg"], // Usa la misma imagen que en OpenGraph
+    title: "JOZUL | Desarrollo de Software",
+    description: "Agencia de tecnología experta en desarrollo web y apps.",
+    images: ['/og-image.jpg'], // 👈 Lo mismo para X (Twitter)
   },
-  // Icono en la pestaña del navegador
+
   icons: {
     icon: '/favicon.ico',
   },
