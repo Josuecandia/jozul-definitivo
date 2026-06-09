@@ -26,7 +26,7 @@ const PROJECTS = [
     image: "/projects/herreria.jpg",
     description: "Desarrollo de identidad visual (Branding) y plataforma web para taller especializado.",
     tags: ["PHP", "JavaScript", "Branding"],
-    link: "https://notaria30qro.mx/her/",
+    link: "https://herreriamv.com/",
     status: "live"
   },
   {
